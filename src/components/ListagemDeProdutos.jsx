@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import Categories from './Categories/Categories';
+
 
 class ListagemDeProdutos extends Component {
   state = {
@@ -18,6 +20,12 @@ class ListagemDeProdutos extends Component {
       <div>
         {redirect && <Redirect to="/shopping-cart" />}
         <p data-testid="home-initial-message">
+        <section>
+          <Categories />
+        </section>
+        <p
+          data-testid="home-initial-message"
+        >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <button onClick={ this.handleButton } data-testid="shopping-cart-button">
