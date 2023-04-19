@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Categories from './Categories/Categories';
 
-
 class ListagemDeProdutos extends Component {
   state = {
     redirect: false,
@@ -19,7 +18,6 @@ class ListagemDeProdutos extends Component {
     return (
       <div>
         {redirect && <Redirect to="/shopping-cart" />}
-        <p data-testid="home-initial-message">
         <section>
           <Categories />
         </section>
