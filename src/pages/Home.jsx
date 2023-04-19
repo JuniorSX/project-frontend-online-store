@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Categories from '../components/Categories/Categories';
 import { getProductsFromQuery } from '../services/api';
+import ProductList from '../components/ProductList/ProductList';
+import { getCategoryId } from '../services/api';
 
 class ListagemDeProdutos extends Component {
   state = {
@@ -9,6 +11,7 @@ class ListagemDeProdutos extends Component {
     queryInput: '',
     isQuery: false,
     queryData: [],
+    productsCategory: [],
   };
 
   handleButtonChart = () => {
@@ -32,18 +35,20 @@ class ListagemDeProdutos extends Component {
     const { value } = target;
     this.setState({
       queryInput: value,
+  getSelectedCategory = async ({ target: { id } }) => {
+    console.log('clicou', id);
+    const category = await getCategoryId(id);
+    this.setState({
+      productsCategory: category.results,
     });
   };
 
   render() {
-    const { redirect, queryInput, isQuery, queryData } = this.state;
+    const { redirect, queryInput, isQuery, queryData, productsCategory } = this.state;
     console.log(queryData);
     return (
       <div>
         {redirect && <Redirect to="/shopping-cart" />}
-        <section>
-          <Categories />
-        </section>
         <p
           data-testid="home-initial-message"
         >
@@ -71,6 +76,14 @@ class ListagemDeProdutos extends Component {
         <button onClick={ this.handleButtonChart } data-testid="shopping-cart-button">
           Carrinho de compras
         </button>
+        <div className="main-section">
+          <section>
+            <Categories getSelectedCategory={ this.getSelectedCategory } />
+          </section>
+          <section>
+            <ProductList productsCategory={ productsCategory } />
+          </section>
+        </div>
       </div>
     );
   }
