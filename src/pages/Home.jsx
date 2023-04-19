@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import Categories from './Categories/Categories';
+import Categories from '../components/Categories/Categories';
 
 class ListagemDeProdutos extends Component {
   state = {

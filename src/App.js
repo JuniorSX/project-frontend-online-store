@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
-import ListagemDeProdutos from './components/ListagemDeProdutos';
-import ShoppingCart from './components/ShoppingCart';
+import Home from './pages/Home';
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Route
           exact
           path="/"
-          component={ ListagemDeProdutos }
+          component={ Home }
         />
         <Route
           exact
