@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class ShoppingCart extends Component {
   // state = {
   //   cartProducts: [],
-  // };
+  //  };
 
   render() {
     // const { cartProducts } = this.state;
