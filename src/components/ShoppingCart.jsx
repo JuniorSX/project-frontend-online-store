@@ -9,7 +9,7 @@ class ShoppingCart extends Component {
     const { cartProducts } = this.state;
     return (
       <div>
-        {!cartProducts.length === 0
+        {cartProducts.length === 0
           ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
           : <div />}
       </div>
