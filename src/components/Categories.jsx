@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Categories extends Component {
   render() {
     return (
-      <div>Categories</div>
-    )
+      <section>Categories</section>
+    );
   }
 }
 
-export default Categories
+export default Categories;
