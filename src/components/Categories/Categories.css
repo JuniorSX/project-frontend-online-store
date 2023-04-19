@@ -1,7 +1,8 @@
 .aside-bar {
   display: flex;
   flex-direction: column;
-  position: fixed;
+  min-width: 250px;
+  width: 25%;
 }
 
 .categories__container {
