@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Categories from '../components/Categories/Categories';
-import { getProductsFromQuery } from '../services/api';
+import { getProductsFromQuery, getCategoryId } from '../services/api';
 import ProductList from '../components/ProductList/ProductList';
-import { getCategoryId } from '../services/api';
 
 class ListagemDeProdutos extends Component {
   state = {
@@ -35,6 +34,9 @@ class ListagemDeProdutos extends Component {
     const { value } = target;
     this.setState({
       queryInput: value,
+    });
+  };
+
   getSelectedCategory = async ({ target: { id } }) => {
     console.log('clicou', id);
     const category = await getCategoryId(id);
