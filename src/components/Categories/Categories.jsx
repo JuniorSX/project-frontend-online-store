@@ -17,11 +17,11 @@ class Categories extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div className='aside-bar'>
+      <div className="aside-bar">
         <h3>
           Categorias
         </h3>
-        <div className='categories__container'>
+        <div className="categories__container">
           {categories.map((category) => (
             <label htmlFor={ category.id } data-testid="category" key={ category.id }>
               {category.name}
