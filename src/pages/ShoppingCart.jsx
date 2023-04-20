@@ -12,17 +12,17 @@ class ShoppingCart extends Component {
   getCartProducts = () => {
     const savedProducts = JSON.parse(localStorage.getItem('cart'));
     savedProducts.forEach((product) => {
-      product.cartQuantity = this.getQuantity(savedProducts, product)
-    })
+      product.cartQuantity = this.getQuantity(savedProducts, product);
+    });
     this.setState({
       cartProducts: savedProducts,
-    })
-  }
+    });
+  };
 
   getQuantity = (array, obj) => {
     const count = array.filter((filteredObj) => filteredObj.id === obj.id).length;
     return count;
-  }
+  };
 
   render() {
     const { cartProducts } = this.state;
@@ -30,8 +30,7 @@ class ShoppingCart extends Component {
       <div>
         {cartProducts.length === 0
           ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
-          : 
-          cartProducts.map((product) => (
+          : cartProducts.map((product) => (
             <article key={ product.id }>
               <div
                 className="product-title"
@@ -48,8 +47,7 @@ class ShoppingCart extends Component {
               </div>
               <p data-testid="shopping-cart-product-quantity">{product.cartQuantity}</p>
             </article>
-          ))
-            }
+          ))}
       </div>
     );
   }
