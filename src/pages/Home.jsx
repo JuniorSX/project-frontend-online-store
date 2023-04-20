@@ -10,7 +10,6 @@ class ListagemDeProdutos extends Component {
     queryInput: '',
     isQuery: false,
     queryData: [],
-    productsCategory: [],
   };
 
   handleButtonChart = () => {
@@ -38,16 +37,14 @@ class ListagemDeProdutos extends Component {
   };
 
   getSelectedCategory = async ({ target: { id } }) => {
-    console.log('clicou', id);
     const category = await getCategoryId(id);
     this.setState({
-      productsCategory: category.results,
+      queryData: category.results,
     });
   };
 
   render() {
-    const { redirect, queryInput, isQuery, queryData, productsCategory } = this.state;
-    console.log(queryData);
+    const { redirect, queryInput, isQuery, queryData } = this.state;
     return (
       <div>
         {redirect && <Redirect to="/shopping-cart" />}
@@ -72,10 +69,11 @@ class ListagemDeProdutos extends Component {
         >
           Pesquisar
         </button>
-        {isQuery ? <h2>Nenhum produto foi encontrado</h2>
-          : <div>ja vou terminar</div>}
 
-        <button onClick={ this.handleButtonChart } data-testid="shopping-cart-button">
+        <button
+          onClick={ this.handleButtonChart }
+          data-testid="shopping-cart-button"
+        >
           Carrinho de compras
         </button>
         <div className="main-section">
@@ -83,7 +81,10 @@ class ListagemDeProdutos extends Component {
             <Categories getSelectedCategory={ this.getSelectedCategory } />
           </section>
           <section>
-            <ProductList productsCategory={ productsCategory } />
+            {isQuery ? <h2>Nenhum produto foi encontrado</h2>
+              : (
+                <ProductList queryData={ queryData } />
+              )}
           </section>
         </div>
       </div>

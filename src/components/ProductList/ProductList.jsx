@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 export default class ProductList extends Component {
   render() {
-    const { productsCategory } = this.props;
+    const { queryData } = this.props;
     return (
       <>
         {
-          productsCategory.map((product) => (
+          queryData.map((product) => (
             <article key={ product.id } data-testid="product">
               <div className="product-title">{product.title}</div>
               <div className="product-image">
@@ -27,7 +27,7 @@ export default class ProductList extends Component {
   }
 }
 ProductList.propTypes = {
-  productsCategory: PropTypes.shape({
+  queryData: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
