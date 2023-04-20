@@ -71,25 +71,24 @@ class ListagemDeProdutos extends Component {
         >
           Pesquisar
         </button>
-        {isQuery ? <h2>Nenhum produto foi encontrado</h2>
-          : (
-            <>
-              <button
-                onClick={ this.handleButtonChart }
-                data-testid="shopping-cart-button"
-              >
-                Carrinho de compras
-              </button>
-              <div className="main-section">
-                <section>
-                  <Categories getSelectedCategory={ this.getSelectedCategory } />
-                </section>
-                <section>
-                  <ProductList queryData={ queryData } />
-                </section>
-              </div>
-            </>
-          )}
+
+        <button
+          onClick={ this.handleButtonChart }
+          data-testid="shopping-cart-button"
+        >
+          Carrinho de compras
+        </button>
+        <div className="main-section">
+          <section>
+            <Categories getSelectedCategory={ this.getSelectedCategory } />
+          </section>
+          <section>
+            {isQuery ? <h2>Nenhum produto foi encontrado</h2>
+              : (
+                <ProductList queryData={ queryData } />
+              )}
+          </section>
+        </div>
       </div>
     );
   }
