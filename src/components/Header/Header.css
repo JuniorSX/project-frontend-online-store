@@ -1,0 +1,18 @@
+header {
+  background-color: rgb(253, 246, 237);
+  border: 1px solid chocolate;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+header p {
+  margin-bottom: 5px;
+}
+
+input, button {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}

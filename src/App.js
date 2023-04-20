@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           path="/shopping-cart"
           component={ ShoppingCart }
         />
+        <Route exact path="/ProductDetail/:id" component={ ProductDetail } />
       </Switch>
     </div>
   );
