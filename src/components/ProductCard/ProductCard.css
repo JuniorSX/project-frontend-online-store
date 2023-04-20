@@ -23,3 +23,33 @@
   padding: 0 20px 15px;
 
 }
+
+.rating-product {
+  border: 1px solid cyan;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.email-rating {
+  display: flex;
+}
+
+.email-rating input {
+  margin: 0 20px 0 0;
+  width: 40%;
+}
+
+.comments-product {
+  border: 1px solid rebeccapurple;
+  display: flex;
+  padding: 20px;
+}
+
+.comment {
+  background-color: #dbedf7;
+  border: 1px solid #ccc;
+  margin: 20px;
+  padding: 20px;
+}
+
