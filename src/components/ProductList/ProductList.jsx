@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './ProductList.css';
 import PropTypes from 'prop-types';
 
@@ -9,15 +10,21 @@ export default class ProductList extends Component {
       <>
         {
           queryData.map((product) => (
-            <article key={ product.id } data-testid="product">
-              <div className="product-title">{product.title}</div>
-              <div className="product-image">
-                <img src={ product.thumbnail } alt={ product.title } />
-              </div>
-              <div className="product-value">
-                R$
-                {product.price}
-              </div>
+
+            <article data-testid="product" key={ product.id }>
+              <Link
+                to={ `/ProductDetail/${product.id}` }
+                data-testid="product-detail-link"
+              >
+                <div className="product-title">{product.title}</div>
+                <div className="product-image">
+                  <img src={ product.thumbnail } alt={ product.title } />
+                </div>
+                <div className="product-value">
+                  R$
+                  {product.price.toFixed(2)}
+                </div>
+              </Link>
             </article>
           ))
         }
