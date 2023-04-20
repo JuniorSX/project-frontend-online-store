@@ -32,6 +32,43 @@ class ShoppingCart extends Component {
     return count;
   };
 
+  removeItem = (product) => {
+    const { cartProducts } = this.state;
+    const productIndex = cartProducts.indexOf(product);
+    cartProducts.splice(productIndex, 1);
+    this.setState({
+      cartProducts,
+    });
+  };
+
+  increaseQuantity = (product) => {
+    const { cartProducts } = this.state;
+    const increasedArray = cartProducts.map((el) => {
+      if (el.id === product.id) {
+        el.cartQuantity = el.cartQuantity < el.available_quantity
+          ? el.cartQuantity + 1
+          : el.available_quantity;
+      }
+      return el;
+    });
+    this.setState({
+      cartProducts: increasedArray,
+    });
+  };
+
+  decreaseQuantity = (product) => {
+    const { cartProducts } = this.state;
+    const decreasedArray = cartProducts.map((el) => {
+      if (el.id === product.id) {
+        el.cartQuantity = el.cartQuantity === 1 ? 1 : el.cartQuantity - 1;
+      }
+      return el;
+    });
+    this.setState({
+      cartProducts: decreasedArray,
+    });
+  };
+
   render() {
     const { cartProducts } = this.state;
     return (
@@ -53,7 +90,25 @@ class ShoppingCart extends Component {
                 R$
                 {product.price.toFixed(2)}
               </div>
+              <button
+                data-testid="product-decrease-quantity"
+                onClick={ () => this.decreaseQuantity(product) }
+              >
+                -
+              </button>
               <p data-testid="shopping-cart-product-quantity">{product.cartQuantity}</p>
+              <button
+                data-testid="product-increase-quantity"
+                onClick={ () => this.increaseQuantity(product) }
+              >
+                +
+              </button>
+              <button
+                data-testid="remove-product"
+                onClick={ () => this.removeItem(product) }
+              >
+                Remover
+              </button>
             </article>
           ))}
       </div>
