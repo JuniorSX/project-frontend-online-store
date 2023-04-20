@@ -37,7 +37,6 @@ class ListagemDeProdutos extends Component {
   };
 
   getSelectedCategory = async ({ target: { id } }) => {
-    console.log('clicou', id);
     const category = await getCategoryId(id);
     this.setState({
       queryData: category.results,
@@ -46,7 +45,6 @@ class ListagemDeProdutos extends Component {
 
   render() {
     const { redirect, queryInput, isQuery, queryData } = this.state;
-    console.log(queryData);
     return (
       <div>
         {redirect && <Redirect to="/shopping-cart" />}
