@@ -3,19 +3,18 @@ import './ProductList.css';
 import PropTypes from 'prop-types';
 
 export default class ProductList extends Component {
-
   addToCart = (product) => {
     const previousCartProducts = localStorage.getItem('cart');
     if (previousCartProducts) {
-      const parsedPreviousCartProducts = JSON.parse(previousCartProducts)
+      const parsedPreviousCartProducts = JSON.parse(previousCartProducts);
       const cartProducts = [...parsedPreviousCartProducts, product];
       const stringifiedProducts = JSON.stringify(cartProducts);
       localStorage.setItem('cart', stringifiedProducts);
     } else {
-      const newCartProduct = JSON.stringify([product])
+      const newCartProduct = JSON.stringify([product]);
       localStorage.setItem('cart', newCartProduct);
     }
-  }
+  };
 
   render() {
     const { queryData } = this.props;
@@ -32,7 +31,12 @@ export default class ProductList extends Component {
                 R$
                 {product.price.toFixed(2)}
               </div>
-              <button onClick={() => this.addToCart(product)}>Adicionar ao carrinho</button>
+              <button
+                onClick={ () => this.addToCart(product) }
+                data-testid="product-add-to-cart"
+              >
+                Adicionar ao carrinho
+              </button>
             </article>
           ))
         }
