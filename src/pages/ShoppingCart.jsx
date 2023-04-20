@@ -15,8 +15,14 @@ class ShoppingCart extends Component {
       savedProducts.forEach((product) => {
         product.cartQuantity = this.getQuantity(savedProducts, product);
       });
+      const filteredArray = [];
+      savedProducts.forEach((product) => {
+        if (!filteredArray.some((el) => el.id === product.id)) {
+          filteredArray.push(product);
+        }
+      });
       this.setState({
-        cartProducts: savedProducts,
+        cartProducts: filteredArray,
       });
     }
   };
