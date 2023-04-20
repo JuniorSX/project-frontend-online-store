@@ -3,6 +3,19 @@ import './ProductList.css';
 import PropTypes from 'prop-types';
 
 export default class ProductList extends Component {
+  addToCart = (product) => {
+    const previousCartProducts = localStorage.getItem('cart');
+    if (previousCartProducts) {
+      const parsedPreviousCartProducts = JSON.parse(previousCartProducts);
+      const cartProducts = [...parsedPreviousCartProducts, product];
+      const stringifiedProducts = JSON.stringify(cartProducts);
+      localStorage.setItem('cart', stringifiedProducts);
+    } else {
+      const newCartProduct = JSON.stringify([product]);
+      localStorage.setItem('cart', newCartProduct);
+    }
+  };
+
   render() {
     const { queryData } = this.props;
     return (
@@ -16,8 +29,14 @@ export default class ProductList extends Component {
               </div>
               <div className="product-value">
                 R$
-                {product.price}
+                {product.price.toFixed(2)}
               </div>
+              <button
+                onClick={ () => this.addToCart(product) }
+                data-testid="product-add-to-cart"
+              >
+                Adicionar ao carrinho
+              </button>
             </article>
           ))
         }
@@ -27,10 +46,10 @@ export default class ProductList extends Component {
   }
 }
 ProductList.propTypes = {
-  queryData: PropTypes.shape({
+  queryData: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     map: PropTypes.func.isRequired,
-  }).isRequired,
+  })).isRequired,
 };
