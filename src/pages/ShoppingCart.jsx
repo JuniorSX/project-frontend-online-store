@@ -11,12 +11,14 @@ class ShoppingCart extends Component {
 
   getCartProducts = () => {
     const savedProducts = JSON.parse(localStorage.getItem('cart'));
-    savedProducts.forEach((product) => {
-      product.cartQuantity = this.getQuantity(savedProducts, product);
-    });
-    this.setState({
-      cartProducts: savedProducts,
-    });
+    if (savedProducts) {
+      savedProducts.forEach((product) => {
+        product.cartQuantity = this.getQuantity(savedProducts, product);
+      });
+      this.setState({
+        cartProducts: savedProducts,
+      });
+    }
   };
 
   getQuantity = (array, obj) => {
