@@ -1,15 +1,47 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import './ProductCard.css';
 
 export default class ProductCard extends Component {
+  state = {
+    redirect: false,
+  };
+
+  handleButtonChart = () => {
+    this.setState({
+      redirect: true,
+    });
+  };
+
+  addToCart = (product) => {
+    const previousCartProducts = localStorage.getItem('cart');
+    if (previousCartProducts) {
+      const parsedPreviousCartProducts = JSON.parse(previousCartProducts);
+      const cartProducts = [...parsedPreviousCartProducts, product];
+      const stringifiedProducts = JSON.stringify(cartProducts);
+      localStorage.setItem('cart', stringifiedProducts);
+    } else {
+      const newCartProduct = JSON.stringify([product]);
+      localStorage.setItem('cart', newCartProduct);
+    }
+  };
+
   render() {
+    const { redirect } = this.state;
     const { product } = this.props;
+    console.log(product);
     return (
       <>
+        {redirect && <Redirect to="/shopping-cart" />}
         <div className="buttons-bar">
           <button>Voltar</button>
-          <button data-testid="shopping-cart-button">Carrinho de Compras</button>
+          <button
+            onClick={ this.handleButtonChart }
+            data-testid="shopping-cart-button"
+          >
+            Carrinho de Compras
+          </button>
         </div>
         <section>
           <div className="img-product">
@@ -42,7 +74,12 @@ export default class ProductCard extends Component {
               </div>
             </div>
             <div className="add-product">
-              <button>ADicionar ao Carrinho</button>
+              <button
+                onClick={ () => this.addToCart(product) }
+                data-testid="product-detail-add-to-cart"
+              >
+                Adicionar ao Carrinho
+              </button>
             </div>
           </div>
         </section>
