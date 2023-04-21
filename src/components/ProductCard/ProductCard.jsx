@@ -94,6 +94,7 @@ export default class ProductCard extends Component {
       this.setState({
         errorMessage: true,
       });
+    }
   };
 
   handleButtonChart = () => {
@@ -114,6 +115,7 @@ export default class ProductCard extends Component {
       localStorage.setItem('cart', newCartProduct);
     }
   };
+
   render() {
     const { email, text, errorMessage, savedReview, redirect } = this.state;
     const { product } = this.props;
@@ -123,10 +125,7 @@ export default class ProductCard extends Component {
         {redirect && <Redirect to="/shopping-cart" />}
         <div className="buttons-bar">
           <button>Voltar</button>
-          <button
-            onClick={ this.handleButtonChart }
-            data-testid="shopping-cart-button"
-          >
+          <button onClick={ this.handleButtonChart } data-testid="shopping-cart-button">
             Carrinho de Compras
           </button>
         </div>
@@ -142,7 +141,6 @@ export default class ProductCard extends Component {
           <div className="detail-product">
             <h2>Especificações Técnicas</h2>
             <ul>
-              <li>Lorem ipsum</li>
               <li>{product.warranty}</li>
             </ul>
             <div className="price-product">
@@ -179,7 +177,6 @@ export default class ProductCard extends Component {
               />
               <input
                 type="radio"
-                name="st"
                 value="1"
                 data-testid="1-rating"
                 onChange={ (e) => this.onValueChange(e) }
