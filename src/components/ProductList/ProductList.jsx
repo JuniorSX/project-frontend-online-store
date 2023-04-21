@@ -36,6 +36,9 @@ export default class ProductList extends Component {
                   R$
                   {product.price.toFixed(2)}
                 </div>
+                {product.shipping.free_shipping
+                  ? <p data-testid="free-shipping">frete grátis</p>
+                  : ''}
               </Link>
               <button
                 onClick={ () => this.addToCart(product) }
@@ -56,6 +59,6 @@ ProductList.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
-    map: PropTypes.func.isRequired,
+    map: PropTypes.func,
   })).isRequired,
 };
