@@ -17,24 +17,18 @@ export default class ProductCard extends Component {
 
   componentDidMount() {
     const time = 300;
-    setTimeout(() => {
-      this.getReview();
-    }, time);
+    setTimeout(() => { this.getReview(); }, time);
   }
 
   onValueChange(event) {
     const rating = Number(event.target.value);
-    this.setState({
-      rating,
-    });
+    this.setState({ rating });
   }
 
   getReview = () => {
     const { id } = this.props;
     const savedReview = JSON.parse(localStorage.getItem(id));
-    this.setState({
-      savedReview,
-    });
+    this.setState({ savedReview });
   };
 
   onInputChange = ({ target }) => {
@@ -45,13 +39,9 @@ export default class ProductCard extends Component {
   validateEmail = () => {
     const { email } = this.state;
     if (validator.isEmail(email)) {
-      this.setState({
-        validEmail: true,
-      });
+      this.setState({ validEmail: true });
     } else {
-      this.setState({
-        validEmail: false,
-      });
+      this.setState({ validEmail: false });
     }
   };
 
@@ -61,27 +51,19 @@ export default class ProductCard extends Component {
     const { product } = this.props;
     if (validEmail && rating > 0) {
       const idProduct = product.id;
-      const review = {
-        email,
-        text,
-        rating,
-      };
+      const review = { email, text, rating };
       const previousReview = localStorage.getItem(idProduct);
       if (previousReview) {
         const parsedpreviousReview = JSON.parse(previousReview);
         const arrayReview = [...parsedpreviousReview, review];
         const stringifiedReview = JSON.stringify(arrayReview);
         localStorage.setItem(idProduct, stringifiedReview);
-        this.setState({
-          savedReview: arrayReview,
-        });
+        this.setState({ savedReview: arrayReview });
       } else {
         const arrayReview = [];
         arrayReview.push(review);
         localStorage.setItem(idProduct, JSON.stringify(arrayReview));
-        this.setState({
-          savedReview: arrayReview,
-        });
+        this.setState({ savedReview: arrayReview });
       }
       this.setState({
         errorMessage: false,
@@ -91,16 +73,12 @@ export default class ProductCard extends Component {
         validEmail: false,
       });
     } else {
-      this.setState({
-        errorMessage: true,
-      });
+      this.setState({ errorMessage: true });
     }
   };
 
   handleButtonChart = () => {
-    this.setState({
-      redirect: true,
-    });
+    this.setState({ redirect: true });
   };
 
   addToCart = (product) => {
@@ -119,7 +97,6 @@ export default class ProductCard extends Component {
   render() {
     const { email, text, errorMessage, savedReview, redirect } = this.state;
     const { product } = this.props;
-    console.log(product);
     return (
       <>
         {redirect && <Redirect to="/shopping-cart" />}
@@ -148,9 +125,7 @@ export default class ProductCard extends Component {
                 R$
                 { product.price }
               </p>
-              <div className="add-remove-quantity">
-                - 1 +
-              </div>
+              <div className="add-remove-quantity"> - 1 + </div>
             </div>
             <div className="add-product">
               <button
@@ -235,9 +210,8 @@ export default class ProductCard extends Component {
                 Avaliar
               </button>
             </div>
-            {errorMessage ? (
-              <span data-testid="error-msg">Campos inválidos</span>
-            ) : (<span>tudo ok</span>)}
+            {errorMessage ? (<span data-testid="error-msg">Campos inválidos</span>)
+              : (<span>tudo ok</span>)}
           </form>
         </section>
         <section className="comments-product">
@@ -252,9 +226,7 @@ export default class ProductCard extends Component {
                   data-static="true"
                 />
                 <hr />
-                <p data-testid="review-card-evaluation">
-                  { review.text }
-                </p>
+                <p data-testid="review-card-evaluation">{ review.text }</p>
               </div>
             ))
           ) : (<p>Nenhuma avaliação</p>)}
