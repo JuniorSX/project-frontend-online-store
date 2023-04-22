@@ -25,7 +25,7 @@ export default class ProductDetail extends Component {
   render() {
     const { product } = this.state;
     return (
-      <ProductCard product={ product } />
+      <ProductCard product={ product } id={ product.id } />
     );
   }
 }
