@@ -13,10 +13,12 @@ export default class ProductList extends Component {
     } else {
       localStorage.setItem('cart', JSON.stringify([product]));
     }
+    const { handleNumberOfProducts } = this.props;
+    handleNumberOfProducts();
   };
 
   render() {
-    const { queryData } = this.props;
+    const { queryData, handleNumberOfProducts } = this.props;
     return (
       <>
         {

@@ -9,6 +9,7 @@ export default class Header extends Component {
       queryInput,
       handleButtonQuery,
       handleChange,
+      numberOfProducts,
     } = this.props;
 
     return (
@@ -37,6 +38,7 @@ export default class Header extends Component {
           </button>
         </form>
         <Link to="/shopping-cart">
+          <span data-testid="shopping-cart-size">{numberOfProducts}</span>
           <button>
             Carrinho de compras
           </button>

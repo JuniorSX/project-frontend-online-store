@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Header from '../components/Header/Header';
 
 class ShoppingCart extends Component {
   state = {

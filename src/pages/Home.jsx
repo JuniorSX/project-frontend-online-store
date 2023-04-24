@@ -9,7 +9,12 @@ class Home extends Component {
     queryInput: '',
     isQuery: false,
     queryData: [],
+    numberOfProducts: 0,
   };
+
+  componentDidMount() {
+    this.handleNumberOfProducts();
+  }
 
   handleButtonQuery = async (event) => {
     event.preventDefault();
@@ -36,8 +41,23 @@ class Home extends Component {
     });
   };
 
+  handleNumberOfProducts = () => {
+    const previousProducts = localStorage.getItem('cart');
+    if (previousProducts) {
+      this.setState({
+        numberOfProducts: JSON.parse(previousProducts).length,
+      });
+    }
+  };
+
   render() {
-    const { redirect, queryInput, isQuery, queryData } = this.state;
+    const {
+      redirect,
+      queryInput,
+      isQuery,
+      queryData,
+      numberOfProducts,
+    } = this.state;
     return (
       <>
         <Header
@@ -45,6 +65,7 @@ class Home extends Component {
           queryInput={ queryInput }
           handleButtonQuery={ this.handleButtonQuery }
           handleChange={ this.handleChange }
+          numberOfProducts={ numberOfProducts }
         />
         <div className="main-section">
           <section>
@@ -53,7 +74,10 @@ class Home extends Component {
           <section>
             {isQuery ? <h2>Nenhum produto foi encontrado</h2>
               : (
-                <ProductList queryData={ queryData } />
+                <ProductList
+                  queryData={ queryData }
+                  handleNumberOfProducts={ this.handleNumberOfProducts }
+                />
               )}
           </section>
         </div>
