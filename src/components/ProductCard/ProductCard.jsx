@@ -26,7 +26,7 @@ export default class ProductCard extends Component {
   }
 
   getReview = () => {
-    const { id } = this.props;
+    const { product: { id } } = this.props;
     const savedReview = JSON.parse(localStorage.getItem(id));
     this.setState({ savedReview });
   };
@@ -82,6 +82,7 @@ export default class ProductCard extends Component {
   };
 
   addToCart = (product) => {
+    const { handleNumberOfProducts } = this.props;
     const previousCartProducts = localStorage.getItem('cart');
     if (previousCartProducts) {
       const parsedPreviousCartProducts = JSON.parse(previousCartProducts);
@@ -92,16 +93,18 @@ export default class ProductCard extends Component {
       const newCartProduct = JSON.stringify([product]);
       localStorage.setItem('cart', newCartProduct);
     }
+    handleNumberOfProducts();
   };
 
   render() {
     const { email, text, errorMessage, savedReview, redirect } = this.state;
-    const { product, handleBack } = this.props;
+    const { product, handleBack, numberOfProducts } = this.props;
     return (
       <>
         {redirect && <Redirect to="/shopping-cart" />}
         <div className="buttons-bar">
           <button onClick={ handleBack }>Go Back</button>
+          <span data-testid="shopping-cart-size">{numberOfProducts}</span>
           <button onClick={ this.handleButtonChart } data-testid="shopping-cart-button">
             Carrinho de Compras
           </button>
@@ -153,6 +156,7 @@ export default class ProductCard extends Component {
               <input
                 type="radio"
                 value="1"
+                name="st"
                 data-testid="1-rating"
                 onChange={ (e) => this.onValueChange(e) }
               />
@@ -240,9 +244,5 @@ ProductCard.propTypes = {
   handleBack: PropTypes.func,
   product: PropTypes.shape({
     id: PropTypes.string,
-    price: PropTypes.number,
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-    warranty: PropTypes.string,
   }),
 }.isRequired;

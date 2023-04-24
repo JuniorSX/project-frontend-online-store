@@ -39,7 +39,7 @@ export default class Header extends Component {
         </form>
         <Link to="/shopping-cart">
           <span data-testid="shopping-cart-size">{numberOfProducts}</span>
-          <button>
+          <button data-testid="shopping-cart-button">
             Carrinho de compras
           </button>
         </Link>
@@ -49,7 +49,8 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  handleButtonQuery: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  queryInput: PropTypes.string.isRequired,
-};
+  handleButtonQuery: PropTypes.func,
+  handleChange: PropTypes.func,
+  queryInput: PropTypes.string,
+  numberOfProducts: PropTypes.number,
+}.isRequired;

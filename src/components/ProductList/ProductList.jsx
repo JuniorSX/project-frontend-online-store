@@ -18,7 +18,7 @@ export default class ProductList extends Component {
   };
 
   render() {
-    const { queryData, handleNumberOfProducts } = this.props;
+    const { queryData } = this.props;
     return (
       <>
         {
@@ -56,9 +56,10 @@ export default class ProductList extends Component {
 }
 ProductList.propTypes = {
   queryData: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
     map: PropTypes.func,
-  })).isRequired,
-};
+  })),
+  handleNumberOfProducts: PropTypes.func,
+}.isRequired;

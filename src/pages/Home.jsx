@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Categories from '../components/Categories/Categories';
 import { getProductsFromQuery, getCategoryId } from '../services/api';
@@ -9,11 +10,11 @@ class Home extends Component {
     queryInput: '',
     isQuery: false,
     queryData: [],
-    numberOfProducts: 0,
   };
 
   componentDidMount() {
-    this.handleNumberOfProducts();
+    const { handleNumberOfProducts } = this.props;
+    handleNumberOfProducts();
   }
 
   handleButtonQuery = async (event) => {
@@ -41,23 +42,15 @@ class Home extends Component {
     });
   };
 
-  handleNumberOfProducts = () => {
-    const previousProducts = localStorage.getItem('cart');
-    if (previousProducts) {
-      this.setState({
-        numberOfProducts: JSON.parse(previousProducts).length,
-      });
-    }
-  };
-
   render() {
     const {
       redirect,
       queryInput,
       isQuery,
       queryData,
-      numberOfProducts,
     } = this.state;
+
+    const { numberOfProducts, handleNumberOfProducts } = this.props;
     return (
       <>
         <Header
@@ -76,7 +69,7 @@ class Home extends Component {
               : (
                 <ProductList
                   queryData={ queryData }
-                  handleNumberOfProducts={ this.handleNumberOfProducts }
+                  handleNumberOfProducts={ handleNumberOfProducts }
                 />
               )}
           </section>
@@ -85,5 +78,10 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  handleNumberOfProducts: PropTypes.func,
+  numberOfProducts: PropTypes.number,
+}.isRequired;
 
 export default Home;
