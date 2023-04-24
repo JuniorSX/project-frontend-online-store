@@ -96,12 +96,12 @@ export default class ProductCard extends Component {
 
   render() {
     const { email, text, errorMessage, savedReview, redirect } = this.state;
-    const { product } = this.props;
+    const { product, handleBack } = this.props;
     return (
       <>
         {redirect && <Redirect to="/shopping-cart" />}
         <div className="buttons-bar">
-          <button>Voltar</button>
+          <button onClick={ handleBack }>Go Back</button>
           <button onClick={ this.handleButtonChart } data-testid="shopping-cart-button">
             Carrinho de Compras
           </button>
@@ -235,16 +235,14 @@ export default class ProductCard extends Component {
     );
   }
 }
+
 ProductCard.propTypes = {
-  history: PropTypes.shape({
-    goBack: PropTypes.func,
-  }).isRequired,
-  id: PropTypes.string.isRequired,
+  handleBack: PropTypes.func,
   product: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    warranty: PropTypes.string.isRequired,
-  }).isRequired,
-};
+    id: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    warranty: PropTypes.string,
+  }),
+}.isRequired;

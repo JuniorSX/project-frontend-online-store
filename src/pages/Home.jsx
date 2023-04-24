@@ -6,16 +6,9 @@ import Header from '../components/Header/Header';
 
 class Home extends Component {
   state = {
-    redirect: false,
     queryInput: '',
     isQuery: false,
     queryData: [],
-  };
-
-  handleButtonChart = () => {
-    this.setState({
-      redirect: true,
-    });
   };
 
   handleButtonQuery = async (event) => {
@@ -50,10 +43,8 @@ class Home extends Component {
         <Header
           redirect={ redirect }
           queryInput={ queryInput }
-          handleButtonChart={ this.handleButtonChart }
           handleButtonQuery={ this.handleButtonQuery }
           handleChange={ this.handleChange }
-
         />
         <div className="main-section">
           <section>

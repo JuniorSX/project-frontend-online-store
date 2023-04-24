@@ -1,20 +1,18 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './Header.css';
 
 export default class Header extends Component {
   render() {
     const {
-      redirect,
       queryInput,
-      handleButtonChart,
       handleButtonQuery,
       handleChange,
     } = this.props;
+
     return (
       <header>
-        {redirect && <Redirect to="/shopping-cart" />}
         <form>
           <p
             data-testid="home-initial-message"
@@ -38,21 +36,18 @@ export default class Header extends Component {
             Pesquisar
           </button>
         </form>
-        <button
-          onClick={ handleButtonChart }
-          data-testid="shopping-cart-button"
-        >
-          Carrinho de compras
-        </button>
+        <Link to="/shopping-cart">
+          <button>
+            Carrinho de compras
+          </button>
+        </Link>
       </header>
     );
   }
 }
 
 Header.propTypes = {
-  handleButtonChart: PropTypes.func.isRequired,
   handleButtonQuery: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   queryInput: PropTypes.string.isRequired,
-  redirect: PropTypes.bool.isRequired,
 };

@@ -22,10 +22,15 @@ export default class ProductDetail extends Component {
     });
   };
 
+  handleBack = () => {
+    const { history } = this.props;
+    history.goBack();
+  };
+
   render() {
     const { product } = this.state;
     return (
-      <ProductCard product={ product } id={ product.id } />
+      <ProductCard product={ product } handleBack={ this.handleBack } />
     );
   }
 }
@@ -34,5 +39,8 @@ ProductDetail.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
-  }).isRequired,
-};
+  }),
+  history: PropTypes.shape({
+    goBack: PropTypes.func,
+  }),
+}.isRequired;

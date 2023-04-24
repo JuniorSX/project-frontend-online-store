@@ -9,11 +9,9 @@ export default class ProductList extends Component {
     if (previousCartProducts) {
       const parsedPreviousCartProducts = JSON.parse(previousCartProducts);
       const cartProducts = [...parsedPreviousCartProducts, product];
-      const stringifiedProducts = JSON.stringify(cartProducts);
-      localStorage.setItem('cart', stringifiedProducts);
+      localStorage.setItem('cart', JSON.stringify(cartProducts));
     } else {
-      const newCartProduct = JSON.stringify([product]);
-      localStorage.setItem('cart', newCartProduct);
+      localStorage.setItem('cart', JSON.stringify([product]));
     }
   };
 
