@@ -9,12 +9,12 @@ export default class ProductList extends Component {
     if (previousCartProducts) {
       const parsedPreviousCartProducts = JSON.parse(previousCartProducts);
       const cartProducts = [...parsedPreviousCartProducts, product];
-      const stringifiedProducts = JSON.stringify(cartProducts);
-      localStorage.setItem('cart', stringifiedProducts);
+      localStorage.setItem('cart', JSON.stringify(cartProducts));
     } else {
-      const newCartProduct = JSON.stringify([product]);
-      localStorage.setItem('cart', newCartProduct);
+      localStorage.setItem('cart', JSON.stringify([product]));
     }
+    const { handleNumberOfProducts } = this.props;
+    handleNumberOfProducts();
   };
 
   render() {
@@ -56,9 +56,10 @@ export default class ProductList extends Component {
 }
 ProductList.propTypes = {
   queryData: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
     map: PropTypes.func,
-  })).isRequired,
-};
+  })),
+  handleNumberOfProducts: PropTypes.func,
+}.isRequired;

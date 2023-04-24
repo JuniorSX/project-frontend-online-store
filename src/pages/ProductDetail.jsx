@@ -7,12 +7,23 @@ import { getProductById } from '../services/api';
 export default class ProductDetail extends Component {
   state = {
     product: '',
+    numberOfProducts: 0,
   };
 
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
     this.loadProduct(id);
+    this.handleNumberOfProducts();
   }
+
+  handleNumberOfProducts = () => {
+    const previousProducts = localStorage.getItem('cart');
+    if (previousProducts) {
+      this.setState({
+        numberOfProducts: JSON.parse(previousProducts).length,
+      });
+    }
+  };
 
   loadProduct = async (id) => {
     const result = await getProductById(id);
@@ -22,10 +33,20 @@ export default class ProductDetail extends Component {
     });
   };
 
+  handleBack = () => {
+    const { history } = this.props;
+    history.goBack();
+  };
+
   render() {
-    const { product } = this.state;
+    const { product, numberOfProducts } = this.state;
     return (
-      <ProductCard product={ product } id={ product.id } />
+      <ProductCard
+        product={ product }
+        handleBack={ this.handleBack }
+        numberOfProducts={ numberOfProducts }
+        handleNumberOfProducts={ this.handleNumberOfProducts }
+      />
     );
   }
 }
@@ -34,5 +55,8 @@ ProductDetail.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
-  }).isRequired,
-};
+  }),
+  history: PropTypes.shape({
+    goBack: PropTypes.func,
+  }),
+}.isRequired;

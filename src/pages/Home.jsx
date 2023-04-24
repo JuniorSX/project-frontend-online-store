@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Categories from '../components/Categories/Categories';
 import { getProductsFromQuery, getCategoryId } from '../services/api';
@@ -6,17 +7,15 @@ import Header from '../components/Header/Header';
 
 class Home extends Component {
   state = {
-    redirect: false,
     queryInput: '',
     isQuery: false,
     queryData: [],
   };
 
-  handleButtonChart = () => {
-    this.setState({
-      redirect: true,
-    });
-  };
+  componentDidMount() {
+    const { handleNumberOfProducts } = this.props;
+    handleNumberOfProducts();
+  }
 
   handleButtonQuery = async (event) => {
     event.preventDefault();
@@ -44,16 +43,22 @@ class Home extends Component {
   };
 
   render() {
-    const { redirect, queryInput, isQuery, queryData } = this.state;
+    const {
+      redirect,
+      queryInput,
+      isQuery,
+      queryData,
+    } = this.state;
+
+    const { numberOfProducts, handleNumberOfProducts } = this.props;
     return (
       <>
         <Header
           redirect={ redirect }
           queryInput={ queryInput }
-          handleButtonChart={ this.handleButtonChart }
           handleButtonQuery={ this.handleButtonQuery }
           handleChange={ this.handleChange }
-
+          numberOfProducts={ numberOfProducts }
         />
         <div className="main-section">
           <section>
@@ -62,7 +67,10 @@ class Home extends Component {
           <section>
             {isQuery ? <h2>Nenhum produto foi encontrado</h2>
               : (
-                <ProductList queryData={ queryData } />
+                <ProductList
+                  queryData={ queryData }
+                  handleNumberOfProducts={ handleNumberOfProducts }
+                />
               )}
           </section>
         </div>
@@ -70,5 +78,10 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  handleNumberOfProducts: PropTypes.func,
+  numberOfProducts: PropTypes.number,
+}.isRequired;
 
 export default Home;
