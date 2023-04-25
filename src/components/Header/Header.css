@@ -1,11 +1,11 @@
 header {
-  background-color: #003BE5;
+  align-items: center;
+  background-color: #003be5;
   border: 1px solid chocolate;
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
   padding: 15px;
-  align-items: center;
 }
 
 header p {
@@ -17,6 +17,7 @@ input, button {
   border-radius: 5px;
   padding: 5px;
 }
-.container-fluid::after, .container::after, aside::after, footer::after, header::after, section::after {
+
+header:after, section:after {
   display: none;
 }

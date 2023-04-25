@@ -26,7 +26,7 @@ export default class Header extends Component {
               type="text"
               id="query-input"
               data-testid="query-input"
-              placeholder="Digite algum termo de pesquisa ou escolha uma categoria"
+              placeholder="Digite algum termo de pesquisa ou escolha uma categorian"
               name="queryInput"
               value={ queryInput }
               onChange={ handleChange }
