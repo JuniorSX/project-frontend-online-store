@@ -64,7 +64,7 @@ class Home extends Component {
           <section>
             <Categories getSelectedCategory={ this.getSelectedCategory } />
           </section>
-          <section>
+          <section className="content">
             {isQuery ? <h2>Nenhum produto foi encontrado</h2>
               : (
                 <ProductList

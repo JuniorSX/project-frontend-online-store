@@ -43,4 +43,53 @@
 
 .main-section {
   display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  width: 100%;
+}
+
+.shopping-list {
+  border: 1px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.increase-decrease {
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  height: 32px;
+  justify-content: center;
+  line-height: 1;
+  transition: 200ms ease-in-out;
+  width: 32px;
+}
+
+.decrease {
+  background-color: #d1d1d1;
+}
+
+.increase {
+  background-color: #abffb0;
+}
+
+.increase:hover {
+  background-color: #25d730;
+}
+
+.decrease:hover {
+  background-color: #858383;
+}
+
+.controls-cart {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }

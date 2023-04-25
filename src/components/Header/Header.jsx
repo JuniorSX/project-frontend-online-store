@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './Header.css';
+import logo from '../../img/logo.svg';
 
 export default class Header extends Component {
   render() {
@@ -25,6 +26,7 @@ export default class Header extends Component {
               type="text"
               id="query-input"
               data-testid="query-input"
+              placeholder="Digite algum termo de pesquisa ou escolha uma categorian"
               name="queryInput"
               value={ queryInput }
               onChange={ handleChange }
@@ -37,10 +39,16 @@ export default class Header extends Component {
             Pesquisar
           </button>
         </form>
+        <img src={ logo } alt="logo" />
         <Link to="/shopping-cart">
-          <span data-testid="shopping-cart-size">{numberOfProducts}</span>
-          <button data-testid="shopping-cart-button">
-            Carrinho de compras
+          <button className="button square m-1" data-testid="shopping-cart-button">
+            <span className="mif-cart" />
+            <span
+              className="badge bg-red fg-white"
+              data-testid="shopping-cart-size"
+            >
+              {numberOfProducts}
+            </span>
           </button>
         </Link>
       </header>

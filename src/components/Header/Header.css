@@ -1,5 +1,6 @@
 header {
-  background-color: rgb(253, 246, 237);
+  align-items: center;
+  background-color: #003be5;
   border: 1px solid chocolate;
   display: flex;
   justify-content: space-between;
@@ -12,7 +13,11 @@ header p {
 }
 
 input, button {
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
   padding: 5px;
+}
+
+header:after, section:after {
+  display: none;
 }
