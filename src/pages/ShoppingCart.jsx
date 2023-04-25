@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 class ShoppingCart extends Component {
   state = {
@@ -40,6 +41,7 @@ class ShoppingCart extends Component {
     this.setState({
       cartProducts,
     });
+    localStorage.setItem('cart', JSON.stringify(cartProducts));
   };
 
   increaseQuantity = (product) => {
@@ -78,47 +80,61 @@ class ShoppingCart extends Component {
   render() {
     const { cartProducts } = this.state;
     return (
-      <div>
+      <>
         <button onClick={ this.handleBack }>Go Back</button>
-        {cartProducts.length === 0
-          ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
-          : cartProducts.map((product) => (
-            <article key={ product.id }>
-              <div
-                className="product-title"
-                data-testid="shopping-cart-product-name"
-              >
-                {product.title}
-              </div>
-              <div className="product-image">
-                <img src={ product.thumbnail } alt={ product.title } />
-              </div>
-              <div className="product-value">
-                R$
-                {product.price.toFixed(2)}
-              </div>
-              <button
-                data-testid="product-decrease-quantity"
-                onClick={ () => this.decreaseQuantity(product) }
-              >
-                -
-              </button>
-              <p data-testid="shopping-cart-product-quantity">{product.cartQuantity}</p>
-              <button
-                data-testid="product-increase-quantity"
-                onClick={ () => this.increaseQuantity(product) }
-              >
-                +
-              </button>
-              <button
-                data-testid="remove-product"
-                onClick={ () => this.removeItem(product) }
-              >
-                Remover
-              </button>
-            </article>
-          ))}
-      </div>
+        <div className="shopping-list">
+          {cartProducts.length === 0
+            ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
+            : cartProducts.map((product) => (
+              <article key={ product.id }>
+                <Link
+                  to={ `/ProductDetail/${product.id}` }
+                >
+                  <div
+                    className="product-title"
+                    data-testid="shopping-cart-product-name"
+                  >
+                    {product.title}
+                  </div>
+                  <div className="product-image">
+                    <img src={ product.thumbnail } alt={ product.title } />
+                  </div>
+                  <div className="product-value">
+                    R$
+                    {product.price.toFixed(2)}
+                  </div>
+                </Link>
+                <div className="controls-cart">
+                  <button
+                    className="increase-decrease decrease"
+                    data-testid="product-decrease-quantity"
+                    onClick={ () => this.decreaseQuantity(product) }
+                  >
+                    -
+                  </button>
+                  <p
+                    data-testid="shopping-cart-product-quantity"
+                  >
+                    {product.cartQuantity}
+                  </p>
+                  <button
+                    className="increase-decrease increase"
+                    data-testid="product-increase-quantity"
+                    onClick={ () => this.increaseQuantity(product) }
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  data-testid="remove-product"
+                  onClick={ () => this.removeItem(product) }
+                >
+                  Remover
+                </button>
+              </article>
+            ))}
+        </div>
+      </>
     );
   }
 }

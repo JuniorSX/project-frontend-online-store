@@ -214,8 +214,7 @@ export default class ProductCard extends Component {
                 Avaliar
               </button>
             </div>
-            {errorMessage ? (<span data-testid="error-msg">Campos inválidos</span>)
-              : (<span>tudo ok</span>)}
+            {errorMessage && (<span data-testid="error-msg">Campos inválidos</span>)}
           </form>
         </section>
         <section className="comments-product">
