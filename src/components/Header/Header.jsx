@@ -41,13 +41,14 @@ export default class Header extends Component {
         </form>
         <img src={ logo } alt="logo" />
         <Link to="/shopping-cart">
-          <span
-            data-testid="shopping-cart-size"
-          >
-            {numberOfProducts !== 0 && (numberOfProducts)}
-          </span>
-          <button data-testid="shopping-cart-button">
-            Carrinho de compras
+          <button className="button square m-1" data-testid="shopping-cart-button">
+            <span className="mif-cart" />
+            <span
+              className="badge bg-red fg-white"
+              data-testid="shopping-cart-size"
+            >
+              {numberOfProducts}
+            </span>
           </button>
         </Link>
       </header>
